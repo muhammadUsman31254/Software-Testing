@@ -1,0 +1,14 @@
+chromadb
+crewai
+crewai-tools
+dotenv
+langchain
+langchain-core
+langchain-community
+langchain-groq
+litellm
+pandas
+pydantic
+pytest
+streamlit
+uv

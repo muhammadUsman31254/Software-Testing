@@ -1,0 +1,58 @@
+#src\software_testing\config\tasks.yaml
+code_analysis:
+  description: >
+    Analyze the provided Python source code at {target_file}.
+    Identify all functions, classes, and methods that should be tested.
+    For each element, determine:
+    1. Its purpose and functionality
+    2. Key test scenarios (happy paths, edge cases, exceptions)
+    3. Test dependencies and potential mocking requirements
+  expected_output: >
+    A structured test plan document with:
+    - List of all testable components
+    - Test scenarios for each component
+    - Test dependencies and setup requirements
+  agent: planner
+
+generate_tests:
+  description: >
+    Using the test plan and the source code at {target_file}, create pytest test cases.
+    For each test case:
+    1. Follow pytest best practices
+    2. Include appropriate assertions
+    3. Handle test dependencies (setup/teardown)
+    4. Add clear comments explaining test purpose
+    Save the tests to a file named 'pytest_{target_file_name}'
+  expected_output: >
+    A complete pytest test file that can be executed.
+    Include appropriate fixtures if needed.
+  agent: test_writer
+
+execute_tests:
+  description: >
+    Execute the pytest test file located at 'pytest_{target_file_name}' and collect the results.
+    Capture:
+    1. Test pass/fail status
+    2. Code coverage metrics
+    3. Execution time
+    4. Any errors or failures
+  expected_output: >
+    A detailed execution report with all test results and metrics.
+  agent: executor
+
+generate_report:
+  description: >
+    Analyze the test execution results and create a comprehensive report.
+    The report should:
+    1. Summarize overall test results
+    2. Highlight any failures with analysis of potential causes
+    3. Provide recommendations for improving test coverage
+    4. Include visualizations or tables where appropriate
+  expected_output: >
+    A markdown report with sections covering:
+    - Executive summary
+    - Test coverage analysis
+    - Detailed test results
+    - Recommendations for improvement
+  agent: reporter
+  output_file: test_report.md
